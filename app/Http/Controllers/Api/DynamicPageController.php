@@ -15,7 +15,7 @@ class DynamicPageController extends Controller
         $data = DynamicPage::where('status', 'active')->get();
 
         if (empty($data)) {
-            return $this->success('No Dynamic Page Found', 200);
+            return $this->success([], 'No Dynamic Page Found', 200);
         }
 
         return $this->success($data, 'Dynamic Pages List', 200);
@@ -26,7 +26,7 @@ class DynamicPageController extends Controller
         $data = DynamicPage::where('page_slug', $slug)->where('status', 'active')->first();
 
         if (empty($data)) {
-            return $this->success('No Dynamic Page Found', 200);
+            return $this->success([], 'No Dynamic Page Found', 200);
         }
 
         return $this->success($data, 'Dynamic Page Details', 200);
