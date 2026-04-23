@@ -1,0 +1,62 @@
+<?php 
+
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\DynamicPageController;
+use App\Http\Controllers\Api\System\SocialMediaController;
+use App\Http\Controllers\Api\System\SystemSettingController;
+use App\Http\Controllers\Api\UserController;
+use Illuminate\Support\Facades\Route;
+
+//Register API
+Route::middleware('throttle:5,1')->controller(RegisterController::class)->prefix('users')->group(function () {
+    // User Register
+    Route::post('/register', 'Register');
+    // Resend OTP
+    Route::post('/resend-otp', 'resendOtp');
+    // Verify OTP
+    Route::post('/verify-otp', 'verifyOtp');
+
+});
+
+//Login API
+Route::middleware('throttle:5,1')->controller(LoginController::class)->prefix('users')->group(function () {
+    // User Login
+    Route::post('/login', 'Login');
+    // Verify Email
+    Route::post('/email-verify', 'emailVerify');
+    // Resend OTP
+    Route::post('/otp-resend', 'otpResend');
+    // Verify OTP
+    Route::post('/otp-verify', 'otpVerify');
+    //Reset Password
+    Route::post('/reset-password', 'resetPassword');
+});
+
+// User Profile
+Route::middleware(['auth:sanctum', 'enabled'])->group(function () {
+    Route::controller(UserController::class)->prefix('user')->group(function () {
+        Route::get('/profile', 'profile');
+        Route::post('/update-profile', 'updateProfile');
+        Route::post('/logout', 'logout');
+        Route::post('/change-password', 'passwordChange');
+        Route::delete('/delete-account', 'deleteAccount');
+    });
+});
+
+// Dynamic Pages
+Route::controller(DynamicPageController::class)->prefix('dynamic-pages')->group(function () {
+    Route::get('/', 'index');
+    Route::get('/{slug}', 'show');
+});
+
+// System Settings
+Route::controller(SystemSettingController::class)->prefix('system-settings')->group(function () {
+    Route::get('/', 'index');
+});
+
+// Social Media Links
+Route::controller(SocialMediaController::class)->prefix('social-media')->group(function () {
+    Route::get('/', 'index');
+});
+
