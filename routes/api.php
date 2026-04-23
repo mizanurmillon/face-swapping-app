@@ -3,10 +3,13 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\DynamicPageController;
+use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\System\SocialMediaController;
 use App\Http\Controllers\Api\System\SystemSettingController;
+use App\Http\Controllers\Api\TutorialController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 //Register API
 Route::middleware('throttle:5,1')->controller(RegisterController::class)->prefix('users')->group(function () {
@@ -60,3 +63,13 @@ Route::controller(SocialMediaController::class)->prefix('social-media')->group(f
     Route::get('/', 'index');
 });
 
+//FAQs
+Route::controller(FaqController::class)->prefix('faqs')->group(function () {
+    Route::get('/', 'index');
+});
+
+//Tutorials
+Route::controller(TutorialController::class)->prefix('tutorials')->group(function () {
+    Route::get('/', 'index');
+    Route::get('/{id}', 'show');
+});
