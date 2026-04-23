@@ -62,4 +62,15 @@ class User extends Authenticatable
             'is_primary' => 'boolean',
         ];
     }
+
+    // Scopes
+    public function scopeVerified($q)
+    {
+        return $q->whereNotNull('email_verified_at');
+    }
+
+    public function scopeActive($q)
+    {
+        return $q->where('is_active', true);
+    }
 }
