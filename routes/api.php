@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\CreditController;
 use App\Http\Controllers\Api\DynamicPageController;
 use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\System\SocialMediaController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Api\System\SystemSettingController;
 use App\Http\Controllers\Api\TutorialController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 //Register API
@@ -44,6 +46,11 @@ Route::middleware(['auth:sanctum', 'enabled'])->group(function () {
         Route::post('/logout', 'logout');
         Route::post('/change-password', 'passwordChange');
         Route::delete('/delete-account', 'deleteAccount');
+    });
+
+    //Credits
+    Route::controller(CreditController::class)->prefix('credit')->group(function () {
+        Route::get('/', 'index');
     });
 });
 
