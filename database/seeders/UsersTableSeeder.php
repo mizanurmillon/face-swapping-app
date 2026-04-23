@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345678'),
                 'role' => 'admin',
-                'avatar' => 'backend/assets/images/user/3.jpg',
+                'avatar' => 'backend/assets/images/user/6.jpg',
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
             ],

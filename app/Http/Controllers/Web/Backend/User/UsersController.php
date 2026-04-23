@@ -40,7 +40,7 @@ class UsersController extends Controller
                             $url = asset($user->avatar);
 
                             if(empty($user->avatar)){
-                                $url = asset('backend/assets/images/user/3.jpg');
+                                $url = asset('backend/assets/images/avtar/18.jpg');
                             }
                             return '<img src="' . $url . '" alt="' . $user->name . '" class="b-r-25 img-50 img-fluid profile-picture">';
                         })

@@ -61,9 +61,7 @@ class ProfileSettingController extends Controller
 
             if ($user->avatar) {
                 $previousImagePath = public_path($user->avatar);
-                if (file_exists($previousImagePath)) {
-                    unlink($previousImagePath);
-                }
+                deleteFile($previousImagePath);
             }
 
             if ($request->hasFile('profile_picture')) {
