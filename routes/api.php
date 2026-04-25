@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
@@ -6,13 +6,12 @@ use App\Http\Controllers\Api\CreditController;
 use App\Http\Controllers\Api\CreditPurchaseController;
 use App\Http\Controllers\Api\DynamicPageController;
 use App\Http\Controllers\Api\FaqController;
+use App\Http\Controllers\Api\RevenueCatWebhookController;
 use App\Http\Controllers\Api\System\SocialMediaController;
 use App\Http\Controllers\Api\System\SystemSettingController;
 use App\Http\Controllers\Api\TutorialController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
-
-
 
 //Register API
 Route::middleware('throttle:5,1')->controller(RegisterController::class)->prefix('users')->group(function () {
@@ -39,6 +38,7 @@ Route::middleware('throttle:5,1')->controller(LoginController::class)->prefix('u
     Route::post('/reset-password', 'resetPassword');
 });
 
+Route::post('/revenuecat/webhook', [RevenueCatWebhookController::class, 'handle']);
 // User Profile
 Route::middleware(['auth:sanctum', 'enabled'])->group(function () {
     Route::controller(UserController::class)->prefix('user')->group(function () {

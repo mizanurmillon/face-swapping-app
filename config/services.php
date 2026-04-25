@@ -14,25 +14,37 @@ return [
     |
     */
 
-    'postmark' => [
+    'postmark'   => [
         'key' => env('POSTMARK_API_KEY'),
     ],
 
-    'resend' => [
+    'resend'     => [
         'key' => env('RESEND_API_KEY'),
     ],
 
-    'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
+    'ses'        => [
+        'key'    => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'slack' => [
+    'slack'      => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
-            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+            'channel'              => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
+    ],
+    'revenuecat' => [
+        'webhook_secret' => env('REVENUECAT_WEBHOOK_SECRET'),
+    ],
+
+    'openai'     => [
+        'driver'       => 'openai',
+        'url'          => env('OPENAI_BASE_URL'),
+        'key'          => env('OPENAI_API_KEY', 'AIzaSyALAEdwlCZDixC_Ckaom8mvARasiN2f6hY'),
+        'model'        => env('OPENAI_MODEL', 'gpt-4o-mini'), // default
+        'vision_model' => env('OPENAI_VISION_MODEL', 'gpt-4o'),
+
     ],
 
      'stripe' => [

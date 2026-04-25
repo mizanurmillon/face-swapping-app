@@ -13,17 +13,26 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_primary')->default(false);
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password_reset_token', 10)->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->string('role', 50)->default('user');
             $table->string('avatar')->nullable();
+            $table->boolean('is_premium')->default(false);
+            $table->string('plan_type')->default('free')->comment('Standard, Pro, Plan illimité');
+            $table->string('provider', 50)->nullable();
+            $table->text('provider_id')->nullable();
             $table->boolean('is_active')->default(true);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->index('role');
+            $table->index('is_active');
+            $table->index('is_premium');
+            $table->index('email');
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
