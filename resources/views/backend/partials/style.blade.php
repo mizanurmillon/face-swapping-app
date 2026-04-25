@@ -1,17 +1,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Zono admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-<meta name="keywords" content="admin template, Zono admin template, dashboard template, flat admin template, responsive admin template, web app">
+<meta name="description"
+    content="FaceFusion is a web application that allows users to upload two photos and merge them together using advanced facial recognition technology. With FaceFusion, you can create unique and personalized images by blending the features of two different faces. Whether you want to see what you would look like with a celebrity or combine your face with a friend's, FaceFusion provides an easy-to-use platform for creating fun and creative images. Try it out today and see the amazing results!">
+<meta name="keywords"
+    content="rahatul rabbi, rahatul, rabbi, rahatul-rabbi, rahatul_rabbi, md rahatul rabbi, web developer, full stack developer, laravel developer, php developer, javascript developer, front end developer,">
+<meta name="author" content="Rahatul Rabbi, Rahatul, Rabbi, Rahatul-Rabbi, Rahatul_Rabbi, MD RAHATUL RABBI">
 <meta name="author" content="pixelstrap">
-<link rel="icon" href="{{ asset($systemSetting->favicon ?? 'backend/assets/images/logo/logo-icon.png') }}" type="image/x-icon">
-<link rel="shortcut icon" href="{{ asset($systemSetting->favicon ?? 'backend/assets/images/logo/logo-icon.png') }}" type="image/x-icon">
+<link rel="icon" href="{{ asset($systemSetting->favicon ?? 'backend/assets/images/logo/logo-icon.png') }}"
+    type="image/x-icon">
+<link rel="shortcut icon" href="{{ asset($systemSetting->favicon ?? 'backend/assets/images/logo/logo-icon.png') }}"
+    type="image/x-icon">
 <title>@yield('title' ?? 'Admin Dashboard')</title>
 <!-- Google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&amp;display=swap"
+    rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+    rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
@@ -118,7 +125,6 @@
         text-decoration: none;
         text-align: left;
     }
-
 </style>
 {{-- toastr end --}}
 

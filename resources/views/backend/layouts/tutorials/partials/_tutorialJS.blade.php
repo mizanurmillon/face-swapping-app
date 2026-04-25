@@ -1,58 +1,52 @@
 <script>
     $(document).ready(function() {
         const dt = $('#data-table').DataTable({
-            processing: true
-            , serverSide: true
-            , responsive: true
-            , stateSave: true
-            , searching: true
-            , paging: true
-            , info: false
-            , ajax: '{{ route('admin.tutorials.index') }}'
-            , order: [
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            stateSave: true,
+            searching: true,
+            paging: true,
+            info: false,
+            ajax: '{{ route('admin.tutorials.index') }}',
+            order: [
                 [0, 'desc']
-            ]
-            , columns: [{
-                    data: 'DT_RowIndex'
-                    , orderable: false
-                    , searchable: false
-                }
-                , {
-                    data: 'title'
-                    , orderable: true
-                    , searchable: true
-                }
-                , {
-                    data: 'description'
-                    , orderable: true
-                    , searchable: true
-                }
-                , {
-                    data: 'video_url'
-                    , orderable: true
-                    , searchable: true
-                }
-                , {
-                    data: 'is_active'
-                    , orderable: true
-                    , searchable: true
-                }
-                , {
-                    data: 'action'
-                    , orderable: false
-                    , searchable: false
-                }
-            , ]
-            , language: {
+            ],
+            columns: [{
+                data: 'DT_RowIndex',
+                orderable: false,
+                searchable: false
+            }, {
+                data: 'title',
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'description',
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'video_url',
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'is_active',
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'action',
+                orderable: false,
+                searchable: false
+            }, ],
+            language: {
                 paginate: {
-                    previous: '<i class="fa fa-angle-left" aria-hidden="true"></i>'
-                    , next: '<i class="fa fa-angle-right" aria-hidden="true"></i>'
-                }
-                , processing: dataTableLoader()
-            }
-            , columnDefs: [{
-                targets: [0, 5]
-                , className: 'text-center'
+                    previous: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    next: '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+                },
+                processing: dataTableLoader()
+            },
+            columnDefs: [{
+                targets: [0, 5],
+                className: 'text-center'
             }]
         });
 
@@ -71,17 +65,17 @@
             const status = $('#status_enabled').val();
 
             $.ajax({
-                url: '{{ route('admin.tutorials.status', ':id') }}'.replace(':id', id)
-                , type: 'PATCH'
-                , data: {
-                    status: status
-                    , _token: '{{ csrf_token() }}'
-                }
-                , success: function(res) {
+                url: '{{ route('admin.tutorials.status', ':id') }}'.replace(':id', id),
+                type: 'PATCH',
+                data: {
+                    status: status,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(res) {
                     dt.ajax.reload(null, false);
                     successModal(res.message || 'Status Updated');
-                }
-                , error: function(xhr) {
+                },
+                error: function(xhr) {
                     console.error(xhr.responseText);
                     errorModal();
                 }
@@ -100,16 +94,16 @@
             const id = $('#delete_id').val();
 
             $.ajax({
-                url: "{{ route('admin.tutorials.destroy', ':id') }}".replace(':id', id)
-                , type: 'DELETE'
-                , data: {
+                url: "{{ route('admin.tutorials.destroy', ':id') }}".replace(':id', id),
+                type: 'DELETE',
+                data: {
                     _token: '{{ csrf_token() }}'
-                }
-                , success: function(res) {
+                },
+                success: function(res) {
                     dt.ajax.reload(null, false);
                     successModal(res.message || 'Deleted Successfully');
-                }
-                , error: function(xhr) {
+                },
+                error: function(xhr) {
                     console.error(xhr.responseText);
                     errorModal();
                 }
@@ -117,6 +111,4 @@
         });
 
     });
-
 </script>
-

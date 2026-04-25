@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include('backend.partials.style')
 </head>
+
 <body>
     <!-- loader starts-->
     <div class="loader-wrapper">
@@ -43,23 +45,19 @@
     @stack('script')
 
     @if (session('success'))
-    <script>
-        successModal('{{ session('
-            success ') }}');
-
-    </script>
+        <script>
+            successModal('{{ session('success') }}');
+        </script>
     @elseif (session('error'))
-    <script>
-        errorModal('{{ session('
-            error ') }}');
-
-    </script>
+        <script>
+            errorModal('{{ session('error') }}');
+        </script>
     @endif
     @if ($errors->any())
-    <script>
-        errorModal('{!! implode(' < br > ', $errors->all()) !!}');
-
-    </script>
+        <script>
+            errorModal('{!! implode('<br>', $errors->all()) !!}');
+        </script>
     @endif
 </body>
+
 </html>

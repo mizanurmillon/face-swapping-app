@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -18,18 +17,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'is_primary',
-        'name',
-        'email',
-        'password',
-        'email_verified_at',
-        'remember_token',
-        'avatar',
-        'role',
-        'is_active',
-        'password_reset_token',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -54,12 +42,12 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-            'agree_to_terms' => 'boolean',
-            'is_active' => 'boolean',
-            'is_primary' => 'boolean',
+            'password'          => 'hashed',
+            'created_at'        => 'datetime',
+            'updated_at'        => 'datetime',
+            'agree_to_terms'    => 'boolean',
+            'is_active'         => 'boolean',
+            'is_premium'        => 'boolean',
         ];
     }
 
@@ -72,5 +60,10 @@ class User extends Authenticatable
     public function scopeActive($q)
     {
         return $q->where('is_active', true);
+    }
+
+    public function scopePremium($q)
+    {
+        return $q->where('is_premium', true);
     }
 }
