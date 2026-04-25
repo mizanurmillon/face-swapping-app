@@ -38,4 +38,13 @@ return [
         'webhook_secret' => env('REVENUECAT_WEBHOOK_SECRET'),
     ],
 
+    'openai'     => [
+        'driver'       => 'openai',
+        'url'          => env('OPENAI_BASE_URL'),
+        'key'          => env('OPENAI_API_KEY', 'AIzaSyALAEdwlCZDixC_Ckaom8mvARasiN2f6hY'),
+        'model'        => env('OPENAI_MODEL', 'gpt-4o-mini'), // default
+        'vision_model' => env('OPENAI_VISION_MODEL', 'gpt-4o'),
+
+    ],
+
 ];

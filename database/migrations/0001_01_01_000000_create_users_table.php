@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('role', 50)->default('user');
             $table->string('avatar')->nullable();
             $table->boolean('is_premium')->default(false);
-            $table->string('plan_type')->default('free')->comment('Growth, Expansion');
+            $table->string('plan_type')->default('free')->comment('Standard, Pro, Plan illimité');
             $table->string('provider', 50)->nullable();
             $table->text('provider_id')->nullable();
             $table->boolean('is_active')->default(true);
