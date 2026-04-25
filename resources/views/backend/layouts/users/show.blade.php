@@ -89,7 +89,7 @@
                 <div class="card-body text-center p-5">
                     <div class="social-img-wrap">
                         <div class="social-img">
-                            <img src="{{ $user->avatar ? asset($user->avatar) : asset('backend/assets/images/user/3.jpg') }}" alt="{{ $user->name }}">
+                            <img src="{{ $user->avatar ? asset($user->avatar) : asset('backend/assets/images/user/profile.jpeg') }}" alt="{{ $user->name }}">
                         </div>
                         @if($user->is_active)
                         <div class="active-badge shadow-lg">
@@ -99,170 +99,87 @@
                     </div>
                     <div class="social-details">
                         <h5 class="mb-1"><a href="social-app.html">{{ $user->name }}</a></h5><span class="f-light">{{ $user->email }}</span>
-                        <ul class="card-social">
+                        {{-- <ul class="card-social">
                             <li><a href="{{  $user->facebook_url ? $user->facebook_url : 'https://www.facebook.com/' }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
 
-                            <li><a href="{{ $user->google_plus_url ? $user->google_plus_url : 'https://plus.google.com/' }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="{{ $user->google_plus_url ? $user->google_plus_url : 'https://plus.google.com/' }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
 
-                            <li><a href="{{ $user->twitter_url ? $user->twitter_url : 'https://twitter.com/' }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="{{ $user->twitter_url ? $user->twitter_url : 'https://twitter.com/' }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
-                            <li><a href="{{ $user->instagram_url ? $user->instagram_url : 'https://www.instagram.com/' }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="{{ $user->instagram_url ? $user->instagram_url : 'https://www.instagram.com/' }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
 
-                            <li><a href="{{ $user->rss_url ? $user->rss_url : 'https://rss.app/' }}" target="_blank"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="{{ $user->rss_url ? $user->rss_url : 'https://rss.app/' }}" target="_blank"><i class="fa fa-rss"></i></a></li>
 
-                        </ul>
+                        </ul> --}}
                         <ul class="social-follow">
                             <li>
-                                <h5 class="mb-0">1,908</h5><span class="f-light">Posts</span>
+                                <h5 class="mb-0">{{ $user->credits->credits ?? 0 }}</h5><span class="f-light">Total Credits</span>
+
                             </li>
                             <li>
-                                <h5 class="mb-0">34.0k</h5><span class="f-light">Followers</span>
+                                <h5 class="mb-0">{{ $user->created_at->format('j M, Y') }}</h5><span class="f-light">Account Created</span>
+
                             </li>
                             <li>
-                                <h5 class="mb-0">897</h5><span class="f-light">Following</span>
+                                <h5 class="mb-0">Pro</h5><span class="f-light">Plan Type</span>
                             </li>
                         </ul>
 
                     </div>
-                    <div class="mt-4">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-left">
+        <div class="col-xl-12 col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">User Payments History</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive custom-scrollbar">
+                        <div id="basic-1_wrapper" class="dataTables_wrapper no-footer">
+                            <table class="dataTable no-footer hover" id="basic-1" role="grid" aria-describedby="basic-1_info">
+                                <thead>
+                                    <tr role="row" class="border-bottom">
+                                        <th>#</th>
+                                        <th>Credit</th>
+                                        <th>Transaction ID</th>
+                                        <th>Payment Method</th>
+                                        <th>Currency</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Purchased At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($user->paymentHistories as $key => $payment)
+                                    <tr role="row" class="odd">
+                                        <td class="sorting_1">{{ $key + 1 }}</td>
+                                        <td>{{ $payment->credit->credit ?? 0 }} Credit</td>
+                                        <td>{{ $payment->stripe_charge_id }}</td>
+                                        <td>{{ $payment->payment_method }}</td>
+                                        <td>{{ $payment->currency }}</td>
+                                        <td>{{ $payment->amount }} €</td>
+                                        <td>
+                                            <span class="badge bg-{{ $payment->status === 'paid' ? 'success' : 'danger' }}">
+                                                {{ ucfirst($payment->status) }}
+                                            </span>
+                                        </td>
+                                        <td>{{ $payment->created_at->format('j M, Y') }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mt-5 float-end">
                         <a href="{{ route('admin.users.index') }}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
             </div>
         </div>
-
-        {{-- <div class="col-xl-7 col-md-4">
-            <div class="card">
-                <div class="card-header card-no-border">
-                    <div class="header-top">
-                        <h4>Last Orders </h4>
-                        <div class="dropdown icon-dropdown setting-menu">
-                            <button class="btn dropdown-toggle" id="userdropdown3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-                                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                                </svg>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown3"><a class="dropdown-item" href="#">Weekly</a><a class="dropdown-item" href="#">Monthly </a><a class="dropdown-item" href="#">Yearly</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body pt-0">
-                    <div class="table-responsive custom-scrollbar">
-                        <table class="last-orders-table table" id="last-orders">
-                            <thead>
-                                <tr>
-                                    <th>Name </th>
-                                    <th>Order No. </th>
-                                    <th>Amount</th>
-                                    <th>Payment Type </th>
-                                    <th>Date</th>
-                                    <th>Action </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="user-data">
-                                            <div><img src="{{ asset('backend/assets/images/dashboard/avtar/2.jpg') }}" alt="avatar">
     </div>
-    <div> <a href="user-profile.html">
-            <h4>Dmitriy Groshev</h4>
-        </a><span>Switzerland</span></div>
-</div>
-</td>
-<td>#790841</td>
-<td>$2.499</td>
-<td>Credit Card</td>
-<td>1 Oct, 14:43</td>
-<td>
-    <div class="dropdown icon-dropdown">
-        <button class="btn dropdown-toggle" id="userdropdownes4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="drop-menu"><i class="icon-more-alt"></i></div>
-        </button>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdownes4"><a class="dropdown-item" href="#">Weekly</a><a class="dropdown-item" href="#">Monthly</a><a class="dropdown-item" href="#">Yearly</a></div>
-    </div>
-</td>
-</tr>
-<tr>
-    <td>
-        <div class="user-data">
-            <div><img src="{{ asset('backend/assets/images/dashboard/avtar/17.jpg') }}" alt="avatar">
-            </div>
-            <div><a href="user-profile.html">
-                    <h4>Patrick Beverley</h4>
-                </a><span> Germany</span></div>
-        </div>
-    </td>
-    <td>#454489</td>
-    <td>$2.499</td>
-    <td>Paypal</td>
-    <td>30 Sep, 23:01</td>
-    <td>
-        <div class="dropdown icon-dropdown">
-            <button class="btn dropdown-toggle" id="userdropdownes1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="drop-menu"><i class="icon-more-alt"></i></div>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdownes1"><a class="dropdown-item" href="#">Weekly</a><a class="dropdown-item" href="#">Monthly</a><a class="dropdown-item" href="#">Yearly</a></div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <div class="user-data">
-            <div><img src="{{ asset('backend/assets/images/avtar/18.jpg') }}" alt="avatar"></div>
-            <div><a href="user-profile.html">
-                    <h4>Kevin Greem</h4>
-                </a><span> Canada</span></div>
-        </div>
-    </td>
-    <td>#594579</td>
-    <td>$2.499</td>
-    <td>Credit Card</td>
-    <td>29 Sep,09:31</td>
-    <td>
-        <div class="dropdown icon-dropdown">
-            <button class="btn dropdown-toggle" id="userdropdownes2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="drop-menu"><i class="icon-more-alt"></i></div>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdownes2"><a class="dropdown-item" href="#">Weekly</a><a class="dropdown-item" href="#">Monthly</a><a class="dropdown-item" href="#">Yearly</a></div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <div class="user-data">
-            <div><img src="{{ asset('backend/assets/images/dashboard/avtar/19.jpg') }}" alt="avatar">
-            </div>
-            <div><a href="user-profile.html">
-                    <h4>William Barton</h4>
-                </a><span>United States</span></div>
-        </div>
-    </td>
-    <td>#478495</td>
-    <td>$2.499</td>
-    <td>Credit Card</td>
-    <td>28 Sep, 04:34</td>
-    <td>
-        <div class="dropdown icon-dropdown">
-            <button class="btn dropdown-toggle" id="userdropdownes3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="drop-menu"><i class="icon-more-alt"></i></div>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdownes3"><a class="dropdown-item" href="#">Weekly</a><a class="dropdown-item" href="#">Monthly</a><a class="dropdown-item" href="#">Yearly </a></div>
-        </div>
-    </td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-
-</div> --}}
-
-</div>
-
 </div>
 <!-- Container-fluid Ends-->
 @endsection

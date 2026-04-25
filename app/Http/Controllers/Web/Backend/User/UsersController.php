@@ -29,6 +29,11 @@ class UsersController extends Controller
                         ->addColumn('created_at', function (User $user) {
                             return $user->created_at->format('d M Y, h:i A');
                         })
+                        ->addColumn('credits', function (User $user) {
+                            $credits = optional($user->credits)->credits ?? 0;
+                            $badgeClass = $credits < 1 ? 'bg-danger' : 'bg-success';
+                            return '<span class="badge ' . $badgeClass . '">' . $credits . ' Credit</span>';
+                        })
                         ->addColumn('role', function (User $user) {
                             if ($user->role === 'admin') {
                                 return '<span class="badge bg-primary">Admin</span>';
@@ -66,7 +71,7 @@ class UsersController extends Controller
                                 'delete' => true,
                             ])->render();
                         })
-                        ->rawColumns(['email_verified_at', 'created_at', 'role', 'avatar', 'is_active', 'action'])
+                        ->rawColumns(['email_verified_at', 'created_at', 'role', 'avatar', 'is_active', 'action', 'credits'])
                         ->make(true);
             } catch (Exception $e) {
                 return $this->error([
@@ -99,7 +104,7 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with(['credits', 'paymentHistories'])->findOrFail($id);
         return view('backend.layouts.users.show', compact('user'));
     }
 

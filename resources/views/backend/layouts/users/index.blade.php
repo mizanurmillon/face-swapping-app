@@ -32,6 +32,7 @@
                                         <th>Photo</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Credits</th>
                                         <th>Role</th>
                                         <th>Account Verified At</th>
                                         <th>Created At</th>

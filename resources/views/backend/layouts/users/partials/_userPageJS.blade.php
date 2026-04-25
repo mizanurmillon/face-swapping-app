@@ -34,6 +34,11 @@
                     , searchable: true
                 }
                 , {
+                    data: 'credits'
+                    , orderable: true
+                    , searchable: true
+                }
+                , {
                     data: 'role'
                     , orderable: true
                     , searchable: true

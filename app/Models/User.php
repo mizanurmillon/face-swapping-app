@@ -73,4 +73,15 @@ class User extends Authenticatable
     {
         return $q->where('is_active', true);
     }
+
+    // Relationships
+    public function credits()
+    {
+        return $this->hasOne(UserCredit::class);
+    }
+
+    public function paymentHistories()
+    {
+        return $this->hasMany(PaymentHistory::class);
+    }
 }

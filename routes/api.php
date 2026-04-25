@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CreditController;
+use App\Http\Controllers\Api\CreditPurchaseController;
 use App\Http\Controllers\Api\DynamicPageController;
 use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\System\SocialMediaController;
@@ -52,6 +53,16 @@ Route::middleware(['auth:sanctum', 'enabled'])->group(function () {
     Route::controller(CreditController::class)->prefix('credit')->group(function () {
         Route::get('/', 'index');
     });
+
+    // Credits Purchase
+    Route::controller(CreditPurchaseController::class)->prefix('credits')->group(function () {
+        Route::post('/purchase', 'purchaseCredits');    
+    });
+});
+
+Route::controller(CreditPurchaseController::class)->group(function () {
+    Route::get('/purchase-success', 'success')->name('purchase.success');
+    Route::get('/purchase-cancel', 'cancel')->name('purchase.cancel');
 });
 
 // Dynamic Pages

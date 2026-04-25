@@ -155,7 +155,7 @@
                     </div>
                 </li>  --}}
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
-                    <div class="d-flex align-items-center profile-media"><img class="b-r-25 img-50 img-fluid profile-picture" src="{{ asset(auth()->user()->avatar ?? 'backend/assets/images/dashboard/profile.png') }}" alt="">
+                    <div class="d-flex align-items-center profile-media"><img class="b-r-25 img-50 img-fluid profile-picture" src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('backend/assets/images/user/profile.jpeg') }}" alt="">
                         <div class="flex-grow-1 user"><span>{{ Auth::user()->name }}</span>
                             <p class="mb-0 font-nunito">{{ Auth::user()->role }}
                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
