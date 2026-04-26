@@ -20,7 +20,7 @@
             </div>
         </div>
         <form class="col-sm-4 form-inline search-full d-none d-xl-block" action="#" method="get">
-            <div class="form-group">
+            {{--  <div class="form-group">
                 <div class="Typeahead Typeahead--twitterUsers">
                     <div class="u-posRelative">
                         <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text"
@@ -37,7 +37,7 @@
                         </svg>
                     </div>
                 </div>
-            </div>
+            </div>  --}}
         </form>
         <div class="nav-right col-xl-8 col-lg-12 col-auto pull-right right-header p-0">
             <ul class="nav-menus">
